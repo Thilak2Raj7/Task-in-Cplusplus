@@ -62,7 +62,17 @@ return true;
 
 return false;
 }
+friend ostream &operator << (ostream &out,Vehicle &vehicle)
+{
+out<<"The brand name of vehicle is  "<<vehicle.getBrand()<<endl;
+out<<"The model of vehicle is "<<vehicle.getModel()<<endl;
+out<<"The type of vehicle is  "<<vehicle.getVehicleType()<<endl;
+out<<"The colour of vehicle is  "<<vehicle.getColor()<<endl;
+out<<"The price of vehicle is  "<<vehicle.getPrice()<<endl;
+out <<"The number of wheels in car is   "<<vehicle.getNumberOfWheels()<<endl;
+out<<endl;
 
+}
 
 };
 #endif
