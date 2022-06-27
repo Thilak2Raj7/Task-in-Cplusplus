@@ -33,7 +33,7 @@ char[] array1=new char[3];
 int  businessRow=0;
 int economyRow=0;
 int count=0;
-Map<String ,Integer> flightObj=new HashMap<>();
+//Map<String ,Integer> flightObj=new HashMap<>();
 public void createFolder(String fileName) throws IOException
 {
 File myFile=new File(fileName);
@@ -488,7 +488,7 @@ public int amountCalculation(String seatClass,String seatType,boolean value,Seat
 	return amount;
 }
 
-public void bookFlight(boolean value,String[] array,List<Passenger> passenger)
+public void bookFlight(boolean value,String[] array,List<Passenger> passenger) throws Exception
 {
 Map<String,Seat> bookSeat=seatBooking.get(flightName);
 int bookingId=getBookingId();
@@ -508,6 +508,10 @@ for(int i=0;i<array.length;i++)
     {
 	
 	Seat seatObj=bookSeat.get(array[i]);
+	if(seatObj==null)
+	{
+		throw new Exception("The seat is  not available");
+	}
 	String seatClass=seatObj.getClassType();
 	String seatType=seatObj.getSeatType();
 	String seatName=seatObj.getSeatName();
@@ -642,10 +646,10 @@ int amount=book.getAmount();
 		  seatAvailable.put(classType, seats);
 		  seatBooking.put(flightName, seatAvailable);
 		  occupiedSeats.put(bookingId, filledSeat);
-		  System.out.println(occupiedSeats);
-		  System.out.println(book.list);
-		  System.out.println(booked);
-		  System.out.println(seatBooking);
+		  //System.out.println(occupiedSeats);
+		 // System.out.println(book.list);
+		  //System.out.println(booked);
+		  //System.out.println(seatBooking);
 		  System.out.println("The amount refunded for your cancellation is "+amount1);
 	  }
 }
@@ -660,7 +664,11 @@ public void mealsOrderedSeats()
 	System.out.println(++count+"-"+meals.get(i));
 	}
 }
-
+public void printOccupiedSeats()
+{
+	for(int id:occupiedSeats.keySet())
+	Map<String,seatName>filledSeats=occupiedSeats.get()
+}
 }
 
 //home/thilak-inc1491/eclipse-workspace/FlightBooking/Flight-A112-Chennai-Mumbai.txt
