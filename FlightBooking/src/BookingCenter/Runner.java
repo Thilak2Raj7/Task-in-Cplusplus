@@ -176,7 +176,7 @@ public class Runner {
 	}
 	public void cancelTicket()
 	{
-		System.out.println("Enter the number of tickets you want to cancel");
+		//System.out.println("Enter the number of tickets you want to cancel");
 		System.out.println("Enter the booking id");
 		int bookingId=scan.nextInt();
 		scan.nextLine();
@@ -270,6 +270,7 @@ public class Runner {
 			}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			System.out.println(e.getMessage());
 			
 		}
@@ -293,6 +294,7 @@ public class Runner {
 		catch(Exception e)
 		{
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 			
 		}
 		break;
@@ -315,6 +317,7 @@ public class Runner {
 		catch(Exception e)
 		{
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		break;
 	case 10:
@@ -326,6 +329,7 @@ public class Runner {
 		catch(Exception e)
 		{
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		break;
 		

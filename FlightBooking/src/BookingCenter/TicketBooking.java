@@ -98,7 +98,7 @@ public void  readFile(String fileName) throws FileNotFoundException, IOException
 		if(character >='1' && character<='9' && count<3)
 		{
 			array[count++]=character;
-			
+			System.out.println(Arrays.toString(array));
 		}
 		else if(character >='0' && character<='9'&& value==false)
 		{
@@ -108,6 +108,7 @@ public void  readFile(String fileName) throws FileNotFoundException, IOException
 		else if(character >='0' && character<='9'&& value==true && count1<3)
 		{
 		 array1[count1++]=character;
+		 System.out.println(Arrays.toString(array1));
 	    }
 		else if(character >='0' && character<='9')
 		{
@@ -199,7 +200,7 @@ for(int j=0;j<row;j++)
 			seatObj.setClassType(classes);
 			char seat=(char)count1;
 			
-			seatObj.setSeatType("Aisle");
+			seatObj.setSeatType("Aisile");
 			seatObj.setFlightName(flightName);
 			seatObj.setSeatName(String.valueOf(count)+""+String.valueOf(seat));
 			count1++;
@@ -333,7 +334,7 @@ public void filterUsingClass() throws FileNotFoundException, IOException
 	  {
 		
 		 sourceFile=flight+".txt";
-		 sourceFile="/home/thilak-inc1491/Development/FlightBooking/"+sourceFile;
+		 sourceFile="/home/thilak-inc1491/eclipse-workspace/FlightBooking/"+sourceFile;
 		 System.out.println("s"+sourceFile);
 		 readFile(sourceFile);
 	        if(businessRow!=0 && economyRow==0)
@@ -348,7 +349,7 @@ public void filterUsingClass() throws FileNotFoundException, IOException
 	  
   System.out.println("s1"+sourceFile);
 
-  sourceFile="/home/thilak-inc1491/Development/FlightBooking/"+sourceFile;
+  //sourceFile="/home/thilak-inc1491/Development/FlightBooking/"+sourceFile;
   System.out.println("s2"+sourceFile);
   
   int row=businessRow;
@@ -417,24 +418,9 @@ for(int i=0;i<flightInfo.size();i++)
 	System.out.println("details"+details);
 	flightName=details;
 	flight=details+".txt";
-		 /* for(int j=0;j<details.length();j++)
-	      {
-	    	  if((int)details.charAt(j)==10)
-	    	  {
-	    		 
-	    		  flight=flight.trim();
-	    		  flightName=flight;
-	    		  flight+=".txt";
-	    	  }
-	    	  else
-	    	  {
-	    		  System.out.println("details"+details);
-	    		  flight+=details.charAt(j);
-	    		  
-	    	  }
-	      }*/
+	
 		
-		flight="/home/thilak-inc1491/Development/FlightBooking/"+flight;
+		flight="/home/thilak-inc1491/eclipse-workspace/FlightBooking/"+flight;
 		System.out.println("flight"+flightName);
 		//flightName+="/home/thilak-inc1491/Development/FlightBooking/"+details;
 		System.out.println(flightName);
@@ -460,7 +446,7 @@ readFile(flight);
 
 seatArrangement(businessRow,"Business",array);
 //availableSeats(flightName);
-if(economyRow==0)
+if(economyRow!=0)
 {
 int row1=economyRow;
 seatArrangement(row1,"Economy",array);
@@ -473,22 +459,19 @@ public int getBookingId()
 {
 	return ++bookingId;
 }
-public int amountCalculation(String seatClass,String seatType,boolean value,boolean booking)
+public int amountCalculation(String seatClass,String seatType,boolean value,Seat seatObj)
 {
 	int amount=0;
-	if(booking)
-	{
-	amount+=amountCount*200;
-	System.out.print(amountCount);
-	System.out.println(amount);
-	}
+	
 	if(seatClass.equals("Business"))
 	{
+	amount+=amountCount*200;
 	amount+=2000;	
 	System.out.println(amount);
 	}
 	if(seatClass.equals("Economy"))
 	{
+		amount+=amountCount*100;
 		amount+=1000;
 		
 	}
@@ -501,7 +484,7 @@ public int amountCalculation(String seatClass,String seatType,boolean value,bool
    {
 	 amount+=200;  
    }
-	
+	seatObj.setAmount(amount);
 	return amount;
 }
 
@@ -530,7 +513,8 @@ for(int i=0;i<array.length;i++)
 	String seatName=seatObj.getSeatName();
 	
 	book.list.add(seatName);
-	amount+=amountCalculation(seatClass,seatType,value,true);
+	amount+=amountCalculation(seatClass,seatType,value,seatObj);
+	
     fillSeat.put(array[i], seatObj);
     bookSeat.remove(array[i]);
     seatBooking.put(flightName, bookSeat);
@@ -621,30 +605,38 @@ Booking book=booked.get(bookingId);
 
 boolean value=book.isMealPreference();
 int amount=book.getAmount();
-System.out.println("Hi");
+
 	if(book.list.contains(seatName))
 	{
-		System.out.println("List"+book.list);
-		System.out.println("Hi1");
+		
+		
 		int index=book.list.indexOf(seatName);
-		System.out.println(index);
-		System.out.println("Hi1");
+		
+		
 		book.list.remove(index);
+		if(book.list==null)
+		{
+			booked.remove(bookingId);
+		}
 		
 	}
 	  Map<String,Seat> filledSeat =occupiedSeats.get(bookingId);
 	  if(filledSeat.containsKey(seatName))
 	  {
-		  System.out.println("Hi");
+		
 		  Seat seats=filledSeat.get(seatName);
 		  String classType=seats.getClassType();
 		  String seatType=seats.getSeatType();
 		  String flightName=seats.getFlightName();
-		  int amount1=amountCalculation(classType,seatType,value,false)-200;
-		  amount=amount-amount1;
-		  
-		  book.setAmount(amount);
+		  int amount1=seats.getAmount()-200;
+		  if(meals.contains(seatName))
+		  {
+			  amount1=amount1-200;
+		  }
+		 		  
+		  book.setAmount(amount1);
 		  filledSeat.remove(seatName);
+		  
 		  meals.remove(seatName);
 		  Map<String,Seat> seatAvailable=seatBooking.get(flightName);
 		  seatAvailable.put(classType, seats);
@@ -659,19 +651,18 @@ System.out.println("Hi");
 }
 public void mealsOrderedSeats()
 {
-	System.out.println(booked);
+	int count=0;
 	
-	System.out.println(meals);
+     
 	for(int i=0;i<meals.size();i++)
 	{
-		System.out.println(meals);
-	System.out.println(i+"-"+meals.get(i));
+	
+	System.out.println(++count+"-"+meals.get(i));
 	}
 }
 
 }
-//home/thilak/Development/FlightBooking/FlightDetails.txt
-//home/thilak/Development/FlightBooking/Flight-A112-Chennai-Mumbai.txt
-//home/thilak-inc1491/Development/FlightBooking/Flight-A112-Chennai-Mumbai.txt
-///home/thilak-inc1491/Development/FlightBooking/FlightDetails.txt
+
+//home/thilak-inc1491/eclipse-workspace/FlightBooking/Flight-A112-Chennai-Mumbai.txt
+///home/thilak-inc1491/eclipse-workspace/FlightBooking/FlightDetails.txt
 
