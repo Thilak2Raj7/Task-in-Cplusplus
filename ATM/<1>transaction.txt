@@ -19,3 +19,11 @@ TransactionNo	Description		Credit/debit 	Amount 	ClosingBalance
 2		CashWithdraw		Debit		2000		37500
 3		Transfer to 2		Debit		1000		36500
 5		Transfer to 4		Debit		1000		35500
+8		CashWithdraw		Debit		2000		39000
+9		CashWithdraw		Debit		7500		31500
+10		CashWithdraw		Debit		7500		24000
+11		Transfer to 1256		Debit		1000		23000
+12		CashWithdraw		Debit		7500		16500
+13		CashWithdraw		Debit		7300		9200
+14		Transfer to 5		Debit		3000		6200
+17		Transfer from3		Credit		10000		16200

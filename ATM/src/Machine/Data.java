@@ -113,7 +113,7 @@ public class Data extends Thread {
 
 	public void writeCustomerDetails(Map<Long, Customer> customer) throws IOException {
 
-		System.out.println(customer);
+	
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("Customer.txt"))) {
 			bw.write("AccountNumber" + "\t" + "AccountHolder" + "\t" + "PinNumber" + "\t" + "ClosingBalance" + '\n');
 			for (long accNo : customer.keySet()) {
@@ -160,18 +160,23 @@ public class Data extends Thread {
 		return customer;
 
 	}
-
+public void checkAccountNumber(long accountNumber) throws Exception
+{
+	if(!customer.containsKey(accountNumber)){
+		throw new Exception("Account does not exist");
+	}
+	
+}
 	public void checkCrediantials(long accountNumber, int pin) throws Exception {
-		if (!customer.containsKey(accountNumber)) {
-
-
-			
-		} else {
+	{
+		
+		    checkAccountNumber(accountNumber);
 			Customer cusObj = customer.get(accountNumber);
 			if (pin == cusObj.getPinNumber()) {
 				System.out.println("logged in Successfully");
 			} else {
-				throw new Exception("Exception occured");
+				throw new Exception("Check pin yoy have entered");
+				
 			}
 		}
 
@@ -400,11 +405,13 @@ public class Data extends Thread {
 			// System.out.println("a1"+amount);
 
 			int den1 = amount / 500;
+			
 			if (den1 > note2) {
 				throw new Exception("Not sufficient amount to withdraw");
 			}
 			/// System.out.println("den"+den1);
 			else {
+				
 				note2 = note2 - den1;
 				amount -= den1 * 500;
 			}

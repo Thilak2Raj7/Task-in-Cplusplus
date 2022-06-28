@@ -44,6 +44,7 @@ public void checkCrediantials(long accountNumber,int pin) throws Exception
 }
 public  Map<Long,Customer> readCustomerDetails() throws IOException
 {
+	
 	return storage.readCustomerDetails();
 }
 public void  writeCustomerDetails(Map<Long,Customer> customer) throws IOException
@@ -56,6 +57,11 @@ public void amountLimit(int amount) throws Exception {
 }
 public void transferLimit(int amount) throws Exception {
 	storage.transferLimit(amount);
+	
+}
+
+public void checkAccountNumber(long receiver) throws Exception {
+	storage.checkAccountNumber(receiver);
 	
 }
 }

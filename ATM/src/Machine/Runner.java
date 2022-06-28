@@ -125,7 +125,7 @@ case 3:
 	
 	System.out.println("Enter the receiver accountId");
 	long receiver=scan.nextLong();
-	
+	obj.checkAccountNumber(receiver);
 	if(accountNo==receiver)
 	{
 		throw new Exception("Sender account and receiver account are same !");
@@ -188,15 +188,17 @@ case 5:
 public void readCustomerDetails() throws IOException
 {
 	Map<Long,Customer> mapObj=obj.readCustomerDetails();
-	for(long accountId:mapObj.keySet())
-	{
-		Customer cusObj=mapObj.get(accountId);
-		System.out.println("The customer name is      "+cusObj.getName());
-		System.out.println("The account number is    "+cusObj.getAccountNumber());
-		System.out.println("The pin number is        "+cusObj.getPinNumber());
-		System.out.println("The account balance is   "+cusObj.getAccountBalance());
-	System.out.println();
-	}
+	System.out.println("AccountNumber"+"\t"+"AccountHolder"+"\t"+"Pin    "+"\t"+"AccountBalance ");
+	
+
+for(long id:mapObj.keySet())
+{
+		Customer cusObj1=mapObj.get(id);
+	    System.out.println("\t"+cusObj1.getAccountNumber()+"\t"+cusObj1.getName()+"\t\t"+cusObj1.getPinNumber()+"\t"+cusObj1.getAccountBalance());
+
+}
+	
+	
 }
 public static void main(String[] args) 
 {
@@ -269,6 +271,7 @@ public static void main(String[] args)
 
 	default:
 		value=false;
+		System.out.println("Kindly check number you have entered!! && Press number from 1  to 4 to perform operation");
 	}
 }
 }
