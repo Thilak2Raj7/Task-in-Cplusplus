@@ -31,7 +31,7 @@ public void loadCash() throws IOException
 }
 
 
-public void customerDetails() throws IOException
+/*public void customerDetails() throws IOException
 {
 	Map<Long,Customer> customer=new HashMap<Long,Customer>();
 
@@ -89,7 +89,7 @@ public void customerDetails() throws IOException
 	obj.writeCustomerDetails(customer);
 	
 	System.out.println("Customer added successfully");
-}
+}*/
 
 public void atmOperation() throws Exception
 { 
@@ -209,9 +209,8 @@ public static void main(String[] args)
 	int number=0;
 	boolean value=true;
 	System.out.println("1.Load cash in Atm");
-	System.out.println("2.Customer details");
-	System.out.println("3.Read the details of customer");
-	System.out.println("4.Atm operation");
+	System.out.println("2.Read the details of customer");
+	System.out.println("3.Atm operation");
     
 	while(value)
 	{
@@ -237,16 +236,8 @@ public static void main(String[] args)
 		}
 		break;
 	
+
 	case 2:
-	try {
-		run.customerDetails();
-	}
-	catch(Exception e)
-	{
-		System.out.println(e.getMessage());
-	}
-	break;
-	case 3:
 		
 			try {
 	run.readCustomerDetails();
@@ -257,7 +248,7 @@ public static void main(String[] args)
 				e.printStackTrace();
 			}
 		break;
-	case 4:
+	case 3:
 		try {
 			
 			run.atmOperation();

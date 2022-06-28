@@ -356,7 +356,7 @@ public void checkAccountNumber(long accountNumber) throws Exception
 		transaction.put(sender, transDetails);
 		writeTransaction(sender);
 		writeTransactionNumber();
-		
+		//System.out.println(transaction);
 	}
 	
 
